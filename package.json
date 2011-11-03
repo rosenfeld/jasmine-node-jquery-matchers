@@ -1,6 +1,6 @@
 {
   "name"          : "jasmine-node-jquery-matchers"
-, "version"       : "0.0.1"
+, "version"       : "0.0.2"
 , "description"   : "jQuery matchers for Jasmine for usage under Node.js environment"
 , "homepage"      : [ "https://github.com/rosenfeld/jasmine-node-jquery-matchers" ]
 , "repository"    : { "type" : "git"

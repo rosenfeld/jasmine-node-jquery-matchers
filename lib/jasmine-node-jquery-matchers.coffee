@@ -2,10 +2,8 @@ exports.jQueryContainer = container = {}
 
 jQueryMatchers =
     toHaveClass: (className) -> @actual.hasClass(className)
-    #toBeVisible: -> @actual.is(':visible')
-    #toBeHidden: -> @actual.is(':hidden')
-    toBeVisible: -> not @actual.hasClass('hidden')
-    toBeHidden: -> @actual.hasClass('hidden')
+    toBeVisible: -> @actual.is(':visible')
+    toBeHidden: -> @actual.is(':hidden') or @actual.hasClass('hidden')
     toBeSelected: -> @actual.is(':selected')
     toBeChecked: -> @actual.is(':checked')
     toBeEmpty: -> @actual.is(':empty')

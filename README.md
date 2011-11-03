@@ -13,10 +13,10 @@ Differences
 I use jsdom for writing my specs against my JavaScript/CoffeeScript code.
 It seems that the ":hidden" and ":visible" jQuery selectors don't work
 correctly under jsdom yet if you're using some CSS class with the 'display'
-attribute set. CSS support needs to be improved in jsdom.
+attribute set (eg.: _.hidden { display: none }_). CSS support needs to be improved in jsdom.
 
-So, as a workaround, beVisible and beHidden will test for the absence/presence
-of the "hidden" CSS class in the jQuery object.
+So, as a workaround, toBeHidden will test for the presence of the "hidden" CSS class,
+in addition to checking for _:hidden_ jQuery selector in the jQuery object.
 
 Installation
 ------
