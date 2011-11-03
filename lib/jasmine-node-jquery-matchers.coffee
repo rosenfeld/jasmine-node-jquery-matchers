@@ -47,7 +47,8 @@ registerMatcher = (name, handler) ->
   matchers[name] = ->
     if @actual instanceof container.jQuery
       result = handler.apply(this, arguments)
-      @actual = container.jQuery('<div />').append(@actual.clone()).html()
+      #@actual = container.jQuery('<div />').append(@actual.clone()).html()
+      @actual = @actual[0]?.outerHTML or '[empty jQuery selection]'
       return result
 
     return builtInMatcher.apply(this, arguments) if builtInMatcher
