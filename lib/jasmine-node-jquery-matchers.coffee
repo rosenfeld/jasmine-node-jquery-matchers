@@ -10,7 +10,7 @@ jQueryMatchers =
     toExist: -> @actual.length
     toHaveAttr: (attributeName, expectedAttributeValue) ->
       hasProperty @actual.attr(attributeName), expectedAttributeValue
-    toHaveId: -> @actual.attr('id') is id
+    toHaveId: (id) -> @actual.attr('id') is id
     toHaveHtml: (html) -> @actual.html() is container.jQuery('<div/>').append(html).html()
 
     toHaveText: (text) ->
