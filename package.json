@@ -1,0 +1,15 @@
+{
+  "name"          : "jasmine-node-jquery-matchers"
+, "version"       : "0.0.1"
+, "description"   : "jQuery matchers for Jasmine for usage under Node.js environment"
+, "homepage"      : [ "https://github.com/rosenfeld/jasmine-node-jquery-matchers" ]
+, "repository"    : { "type" : "git"
+                    , "url"  : "https://github.com/rosenfeld/jasmine-node-jquery-matchers"
+                    }
+, "keywords"      : ["jasmine", "node", "jquery"]
+, "author"        : "Rodrigo Rosenfeld Rosas <rr.rosas@gmail.com>"
+, "maintainers"   : "Rodrigo Rosenfeld Rosas <rr.rosas@gmail.com>"
+, "licenses"      : ["MIT"]
+, "dependencies"  : { "jasmine-node" : "" }
+, "main"          : "lib/jasmine-node-jquery-matchers.coffee"
+}
