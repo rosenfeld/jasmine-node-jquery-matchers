@@ -1,9 +1,15 @@
-exports.jQueryContainer = container = {}
+exports.options = options = hiddenClass: 'hidden'
 
 jQueryMatchers =
     toHaveClass: (className) -> @actual.hasClass(className)
     toBeVisible: -> @actual.is(':visible')
-    toBeHidden: -> @actual.is(':hidden') or @actual.hasClass('hidden')
+    toBeHidden: -> @actual.is(':hidden')
+    toBeAllVisible: -> not @actual.filter(':hidden').length
+    toBeAllHidden: -> not @actual.filter(':visible').length
+    toBeCssHidden: (hiddenClass) -> @actual.hasClass(hiddenClass or options.hiddenClass)
+    toBeCssVisible: (hiddenClass) -> not @actual.hasClass(hiddenClass or options.hiddenClass)
+    toBeAllCssVisible: (hiddenClass) -> not @actual.filter(".#{hiddenClass or options.hiddenClass}").length
+    toBeAllCssHidden: (hiddenClass) -> not @actual.filter(":not(.#{hiddenClass or options.hiddenClass})").length
     toBeSelected: -> @actual.is(':selected')
     toBeChecked: -> @actual.is(':checked')
     toBeEmpty: -> @actual.is(':empty')
@@ -11,10 +17,10 @@ jQueryMatchers =
     toHaveAttr: (attributeName, expectedAttributeValue) ->
       hasProperty @actual.attr(attributeName), expectedAttributeValue
     toHaveId: (id) -> @actual.attr('id') is id
-    toHaveHtml: (html) -> @actual.html() is container.jQuery('<div/>').append(html).html()
+    toHaveHtml: (html) -> @actual.html() is options.jQuery('<div/>').append(html).html()
 
     toHaveText: (text) ->
-      #if container.jQuery.isFunction text?.test
+      #if options.jQuery.isFunction text?.test
       if typeof text?.test == "function"
         text.test @actual.text()
       else
@@ -45,9 +51,9 @@ exports.matchers = matchers = {}
 registerMatcher = (name, handler) ->
   builtInMatcher = jasmine.Matchers.prototype[name]
   matchers[name] = ->
-    if @actual instanceof container.jQuery
+    if @actual instanceof options.jQuery
       result = handler.apply(this, arguments)
-      #@actual = container.jQuery('<div />').append(@actual.clone()).html()
+      #@actual = options.jQuery('<div />').append(@actual.clone()).html()
       @actual = @actual[0]?.outerHTML or '[empty jQuery selection]'
       return result
 

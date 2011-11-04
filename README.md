@@ -5,7 +5,9 @@ jQuery matchers for Jasmine for usage under Node.js environment.
 
 The matchers were extracted from [jasmine-jquery](https://github.com/velesin/jasmine-jquery).
 
-Go check for the available selectors documentation there.
+Go check for the available selectors documentation there. Besides those ones, the following
+matchers were added to this package: toBeCssHidden, toBeCssVisible, toBeAllHidden, toBeAllVisible,
+toBeAllCssHidden and toBeAllCssVisible.
 
 Differences
 ------
@@ -15,8 +17,9 @@ It seems that the ":hidden" and ":visible" jQuery selectors don't work
 correctly under jsdom yet if you're using some CSS class with the 'display'
 attribute set (eg.: _.hidden { display: none }_). CSS support needs to be improved in jsdom.
 
-So, as a workaround, toBeHidden will test for the presence of the "hidden" CSS class,
-in addition to checking for _:hidden_ jQuery selector in the jQuery object.
+So, as a workaround, toBeCssHidden and toBeCssVisible will test for the
+presence/absense of the class provided by its sole argument or the one set in
+options.hiddenClass ("hidden" by default).
 
 Installation
 ------
@@ -30,9 +33,10 @@ Usage
     var jsdom = require('jsdom'), jqm = require('jasmine-node-jquery-matchers'),
         already_run = false, $
 
-    jsdom.env('<div id="dialog" class="hidden">My dialog content</div>', ['http://code.jquery.com/jquery.min.js'],
+    jsdom.env('<div id="dialog" class="hidden">My dialog content</div><p>Visible</p>', ['http://code.jquery.com/jquery.min.js'],
       function(errors, window) {
-        jqm.jQueryContainer.jQuery = $ = window.$
+        jqm.options.jQuery = $ = window.$
+        jqm.options.hiddenClass = 'hidden'
         jasmine.asyncSpecDone()
       });
 
@@ -41,7 +45,13 @@ Usage
 
     describe("After jQuery is loaded", function() {
       it("#dialog should be hidden", function() {
-        expect($('#dialog')).toBeHidden()
+        expect($('#dialog')).toBeCssHidden()
+      })
+
+      it("p should be visible", function() {
+        expect($('p')).toBeVisible()
+        $('p').hide()
+        expect($('p')).toBeHidden()
       })
     })
 
@@ -64,10 +74,8 @@ FAQ
 
 q: Why isn't this package published under NPM yet?
 
-a: Because I didn't use all those matchers yet and I'm not sure if they work.
-But specially because I'm not comfortable with the hack mentioned under the
-"Differences" topic, which can be misleading if you don't hide elements adding
-the "hidden" CSS class, as I do.
+a: Because I didn't use all those matchers yet and I'm not sure if they work
+as no specs were written for this package yet.
 
 q: Why should I use this untested code?
 
