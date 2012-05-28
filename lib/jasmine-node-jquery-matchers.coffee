@@ -16,6 +16,12 @@ jQueryMatchers =
     toExist: -> @actual.length
     toHaveAttr: (attributeName, expectedAttributeValue) ->
       hasProperty @actual.attr(attributeName), expectedAttributeValue
+    toHaveAttrs: (attributes) ->
+      (return false unless @toHaveAttr(prop, value)) for prop, value of attributes
+      true
+    toHaveCss: (css)->
+      (return false unless @actual.css(prop) is value) for prop, value of css
+      true
     toHaveId: (id) -> @actual.attr('id') is id
     toHaveHtml: (html) -> @actual.html() is options.jQuery('<div/>').append(html).html()
 
