@@ -7,7 +7,7 @@ The matchers were extracted from [jasmine-jquery](https://github.com/velesin/jas
 
 Go check for the available selectors documentation there. Besides those ones, the following
 matchers were added to this package: toBeCssHidden, toBeCssVisible, toBeAllHidden, toBeAllVisible,
-toBeAllCssHidden and toBeAllCssVisible.
+toBeAllCssHidden, toBeAllCssVisible, toHaveAttrs and toHaveCss.
 
 Differences
 ------
